@@ -1,6 +1,6 @@
 ﻿#Create OUs
 Set-Location c:\vagrant
-$users = Import-Csv -Path .\3000users.csv
+$users = Import-Csv -Path c:\vagrant\3000users.csv
 
 foreach ($user in $users) {
     # Check if the OU exists
