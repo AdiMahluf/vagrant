@@ -1,4 +1,9 @@
-﻿#Create OUs
+﻿$username = "contoso\vagrant"
+$password = "vagrant"
+$securePassword = ConvertTo-SecureString $password -AsPlainText -Force
+$credential = New-Object System.Management.Automation.PSCredential ($username, $securePassword)
+Invoke-Command -Credential $credential -ScriptBlock {
+#Create OUs
 Set-Location c:\vagrant
 $users = Import-Csv -Path c:\vagrant\3000users.csv
 
@@ -12,4 +17,5 @@ foreach ($user in $users) {
         # Create the OU if it does not exist
         New-ADOrganizationalUnit -Name $ou -ProtectedFromAccidentalDeletion $false -ErrorAction SilentlyContinue
     }
+}
 }
